@@ -2,7 +2,7 @@
 layout: section
 ---
 
-# 2. Stochastic Gradients
+# Stochastic Gradients
 
 Trade exact but expensive gradients for noisy but frequent updates.
 
@@ -12,7 +12,7 @@ noisy gradient; a large batch gives a reliable but expensive one. Mini-batches a
 -->
 
 ---
-zoom: 0.82
+zoom: 0.98
 ---
 
 # Full-Batch GD, SGD and Mini-Batch SGD
@@ -64,7 +64,7 @@ need one stored gradient tensor per example.
 -->
 
 ---
-zoom: 0.86
+zoom: 0.99
 ---
 
 # Why Does a Noisy Gradient Work?
@@ -105,7 +105,7 @@ later. It is not evidence that noise always helps generalization.
 -->
 
 ---
-zoom: 0.88
+zoom: 0.94
 ---
 
 # Mini-Batches Reduce Noise — with Diminishing Returns
@@ -147,7 +147,7 @@ updates per epoch. Hardware utilization is the other side of the trade-off.
 -->
 
 ---
-zoom: 0.82
+zoom: 0.86
 ---
 
 # Batches, Steps and Epochs in PyTorch
@@ -160,16 +160,17 @@ zoom: 0.82
 * **Iteration / step:** one call to `optimizer.step()`
 * **Epoch:** one pass through the training dataset
 
-### Example: CIFAR-10
+#### Example: CIFAR-10
 | Quantity | Value |
 |---|---:|
-| Training images | 50,000 |
-| Batch size | 100 |
-| Steps per epoch | **500** |
-| Steps in 100 epochs | **50,000** |
+| Training images | $50\,000$ |
+| Batch size | $100$ |
+| Steps per epoch | $500$ |
+| Steps in 100 epochs | $50\,000$ |
 
 </div>
 <div>
+<br>
 
 ```python
 train_loader = DataLoader(
@@ -206,7 +207,7 @@ Shuffling avoids a fixed order and gives a fresh permutation each epoch. With re
 -->
 
 ---
-zoom: 0.84
+zoom: 0.93
 ---
 
 # Choosing a Batch Size in Practice

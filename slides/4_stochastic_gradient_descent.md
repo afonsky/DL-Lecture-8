@@ -2,7 +2,7 @@
 layout: section
 ---
 
-# 4. Schedules and Training Practice
+# Schedules and Training Practice
 
 The optimizer chooses the update; the learning-rate schedule controls its size over time.
 
@@ -12,7 +12,7 @@ explanation. It finishes with an actionable choice and debugging workflow.
 -->
 
 ---
-zoom: 0.86
+zoom: 0.99
 ---
 
 # Why Change the Learning Rate During Training?
@@ -58,7 +58,7 @@ learning-rate drop improves validation accuracy immediately or by a fixed amount
 -->
 
 ---
-zoom: 0.80
+zoom: 0.89
 ---
 
 # Four Useful Schedule Patterns
@@ -69,6 +69,14 @@ zoom: 0.80
     <img src="/lr_schedules.png" style="width: 510px !important;">
     <figcaption style="color:#b3b3b3ff; font-size: 11px;">Computed for this lecture after <a href="https://d2l.ai/chapter_optimization/lr-scheduler.html#policies">d2l.ai 12.11.3</a></figcaption>
   </figure>
+
+<br>
+
+<v-click>
+
+> #### Choose and tune schedules on **validation data**.<br> No schedule wins on every task.
+
+</v-click>
 </div>
 <div>
 
@@ -79,11 +87,6 @@ zoom: 0.80
 | **Cosine** | Smooth decay to a small final rate; common for long training |
 | **Warmup + decay** | Unstable early training; standard for Transformers |
 
-<v-click>
-
-#### Choose and tune schedules on **validation data**. No schedule wins on every task.
-
-</v-click>
 </div>
 </div>
 
@@ -98,7 +101,7 @@ particularly common for Transformers; it is not mandatory for every MLP or CNN.
 -->
 
 ---
-zoom: 0.85
+zoom: 0.99
 ---
 
 # Schedulers in PyTorch: Step at the Right Time
@@ -137,7 +140,7 @@ scheduler = ReduceLROnPlateau(
 
 <v-click>
 
-#### `ReduceLROnPlateau` needs the validation metric: `scheduler.step(val_loss)`. A per-batch schedule needs `scheduler.step()` inside the batch loop instead.
+#### `ReduceLROnPlateau` needs the validation metric: `scheduler.step(val_loss)`.<br><br> A per-batch schedule needs `scheduler.step()` inside the batch loop instead.
 
 </v-click>
 </div>
@@ -154,7 +157,7 @@ before a long run. Skip this code slide if late; the previous slide carries the 
 -->
 
 ---
-zoom: 0.70
+zoom: 0.74
 ---
 
 # Which Optimizer Should You Start With?
@@ -185,7 +188,7 @@ budget and tune each method reasonably.
 -->
 
 ---
-zoom: 0.70
+zoom: 0.72
 ---
 
 # Debugging: Read the Symptom Before Changing the Optimizer
@@ -211,7 +214,7 @@ vanishing gradients. Check for NaNs and bad inputs before assuming the learning 
 -->
 
 ---
-zoom: 0.86
+zoom: 0.94
 ---
 
 # A Practical Optimization Workflow
@@ -223,6 +226,8 @@ zoom: 0.86
 * Check initial loss and one batch of shapes
 * **Overfit one small batch** *(Lecture 3)*
 * Plot training and validation curves
+
+<br>
 
 ### 2. Establish a baseline
 * Simple optimizer, constant LR, fixed seed
@@ -236,6 +241,8 @@ zoom: 0.86
 * Add momentum or adaptive scaling
 * Then tune schedule and weight decay on validation
 * Repeat promising runs with several seeds
+
+<br>
 
 ### 4. Keep evidence
 * Log LR, gradient norms, losses and metrics

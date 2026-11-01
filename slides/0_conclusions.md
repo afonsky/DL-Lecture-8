@@ -41,7 +41,7 @@ batch norm and the visible step schedule (Lecture 5), gradient clipping (Lecture
 -->
 
 ---
-zoom: 0.61
+zoom: 0.76
 ---
 
 # Learn More from the Experts
@@ -63,6 +63,8 @@ zoom: 0.61
 <style>
 .experts td, .experts th { padding-top: 0.3em; padding-bottom: 0.3em; }
 </style>
+
+<br>
 
 #### Main text: [d2l.ai, Chapter 12 — Optimization Algorithms](https://d2l.ai/chapter_optimization/index.html) · Interactive: [Why Momentum Really Works](https://distill.pub/2017/momentum/)
 

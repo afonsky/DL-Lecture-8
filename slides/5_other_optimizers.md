@@ -1,3 +1,11 @@
+---
+layout: section
+---
+
+# Other Optimizers
+
+---
+
 # The Problem with Vanilla SGD
 
 ### SGD struggles in "ravines" — narrow valleys that are common in loss surfaces

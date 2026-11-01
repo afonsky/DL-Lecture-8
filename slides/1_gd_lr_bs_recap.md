@@ -2,7 +2,7 @@
 layout: section
 ---
 
-# 1. The Objective and Gradient Descent
+# The Objective<br> and<br> Gradient Descent
 
 Training loss is not the final goal — and the gradient is only local information.
 
@@ -12,12 +12,12 @@ and does the resulting model work on new data? Then it recalls only the gradient
 -->
 
 ---
-zoom: 0.86
+zoom: 0.98
 ---
 
 # Optimization Is Not Generalization
 
-<div class="grid grid-cols-[3fr_4fr] gap-8">
+<div class="grid grid-cols-[3fr_3fr] gap-8">
 <div>
 
 ### The optimizer sees
@@ -26,15 +26,18 @@ zoom: 0.86
 * Nothing about future examples
 
 <v-click>
+<br>
 
 ### We actually want
 * Low loss on **new data**
-* So tune on **validation**, report on **test** *(Lecture 2)*
+* So tune on **validation**, report on **test**<br> *(Lecture 2)*
 * A lower training loss does not guarantee a better model
 
 </v-click>
 </div>
 <div>
+<br>
+<br>
   <figure>
     <img src="/optimization_goal.png" style="width: 480px !important;">
     <figcaption style="color:#b3b3b3ff; font-size: 11px; position: relative; top: 10px">Image source: <a href="https://d2l.ai/chapter_optimization/optimization-intro.html#goal-of-optimization">d2l.ai Fig. 12.1.1 The minimum of the empirical risk may differ from the minimum of the risk</a></figcaption>
@@ -53,12 +56,12 @@ model selection needs the second. Do not call the validation curve "population r
 -->
 
 ---
-zoom: 0.87
+zoom: 0.9
 ---
 
 # Where First-Order Optimization Can Stall
 
-<img src="/landscape_challenges.png" style="width: 850px !important;">
+<img src="/landscape_challenges.png" style="width: 950px !important;">
 
 <figcaption style="color:#b3b3b3ff; font-size: 11px; position: relative; top: 10px">Image source: <a href="https://d2l.ai/chapter_optimization/optimization-intro.html#optimization-challenges-in-deep-learning">d2l.ai Figs. 12.1.2, 12.1.3 and 12.1.5 Local minimum, saddle point and vanishing gradient</a></figcaption>
 
@@ -94,7 +97,44 @@ normalization and residual connections address parts of that problem; an optimiz
 -->
 
 ---
-zoom: 0.76
+
+# The Optimization Landscape
+
+### What does the loss surface look like?
+
+<div class="grid grid-cols-[3fr_3fr] gap-10">
+<div>
+
+<v-clicks>
+
+* In deep learning, loss is a function of **millions** of parameters
+* We can't visualize it directly<br> (too many dimensions!)
+* But we can use PCA and project first components into 2D/3D
+
+</v-clicks>
+
+<br>
+
+<v-click>
+
+### Key insight:
+> Deep learning loss surfaces are **non-convex**<br> — they have many hills, valleys, and flat regions
+
+</v-click>
+
+</div>
+<div>
+  <figure>
+    <img src="/VGG_Resnet_loss_landscapes.png" style="width: 450px !important;">
+    <figcaption style="color:#b3b3b3ff; font-size: 11px;"><br>VGG-56 (chaotic) vs ResNet-56 (smooth). Source:
+      <a href="https://arxiv.org/abs/1712.09913">Li et al., 2018</a>
+    </figcaption>
+  </figure>
+</div>
+</div>
+
+---
+zoom: 0.99
 ---
 
 # Convex and Non-Convex: What Changes?
@@ -106,6 +146,8 @@ zoom: 0.76
 * Every local minimum is a **global minimum**
 * With suitable step sizes, gradient methods have convergence guarantees
 * Linear, logistic and softmax regression *(Lecture 2)*
+
+<br>
 
 <v-click>
 
@@ -119,6 +161,8 @@ zoom: 0.76
 * No general global-optimality guarantee
 * MLPs, CNNs, RNNs and Transformers
 
+<br>
+
 <v-click>
 
 **Useful solutions still exist.** Architecture and initialization shape the optimization problem *(Lectures 3 and 5)*.
@@ -126,18 +170,10 @@ zoom: 0.76
 </div>
 </div>
 
-<div class="grid grid-cols-[2fr_3fr] gap-8 mt-3">
-<div>
+<br>
 
-#### A guarantee is about convergence,<br>**not** about test accuracy.
-</div>
-<div>
-  <figure>
-    <img src="/VGG_Resnet_loss_landscapes.png" style="width: 270px !important;">
-    <figcaption style="color:#b3b3b3ff; font-size: 11px;">2-D visualizations of VGG and ResNet loss surfaces. Source: <a href="https://arxiv.org/abs/1712.09913">Li et al., 2018, Fig. 1</a></figcaption>
-  </figure>
-</div>
-</div>
+> #### A guarantee is about convergence, **not** about test accuracy.
+
 
 <!--
 Do not say "gradient descent always finds the best solution" even for convex objectives: step size and stopping
@@ -148,7 +184,7 @@ make this visualization smoother; Lecture 5 showed their effect on trainability.
 -->
 
 ---
-zoom: 0.85
+zoom: 0.99
 ---
 
 # Gradient Descent: One Update, Two Decisions
@@ -159,11 +195,11 @@ zoom: 0.85
 ### Direction and step size
 $$\theta_{t+1} = \theta_t - \eta\,g_t$$
 
-* $g_t=\nabla_\theta\mathcal L(\theta_t)$: local direction of steepest **ascent**
+* $g_t=\nabla_\theta\mathcal L(\theta_t)$: local direction<br> of steepest **ascent**
 * Move in the **opposite** direction
 * $\eta$: the **learning rate**, chosen by us
 
-### PyTorch: the optimizer owns the update
+#### PyTorch: the optimizer owns the update
 ```python
 optimizer.zero_grad()
 logits = model(X)
@@ -191,16 +227,16 @@ The loop omits device transfers and model.train() for focus; it is the update pa
 -->
 
 ---
-zoom: 0.86
+zoom: 0.96
 ---
 
 # Learning Rate: The First Thing to Tune
 
-<img src="/learning_rate_gd.png" style="width: 850px !important;">
+<img src="/learning_rate_gd.png" style="width: 950px !important;">
 
 <figcaption style="color:#b3b3b3ff; font-size: 11px; position: relative; top: 10px">Image source: <a href="https://d2l.ai/chapter_optimization/gd.html#learning-rate">d2l.ai Figs. 12.3.1–12.3.3 Gradient descent on f(x) = x² with learning rates 0.2, 0.05 and 1.1</a></figcaption>
 
-<div class="grid grid-cols-[3fr_2fr] gap-8 mt-3">
+<div class="grid grid-cols-[4fr_2fr] gap-8 mt-3">
 <div>
 
 * **Too small:** many updates, slow progress

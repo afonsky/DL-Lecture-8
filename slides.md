@@ -74,5 +74,9 @@ src: ./slides/0_backup.md
 ---
 
 ---
+src: ./slides/5_other_optimizers.md
+---
+
+---
 src: ./slides/0_end.md
 ---

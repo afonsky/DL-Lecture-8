@@ -2,7 +2,7 @@
 layout: section
 ---
 
-# 3. Better Update Rules
+# Better Update Rules
 
 Add memory of past gradients — for direction, for scale, or for both.
 
@@ -12,16 +12,16 @@ gradients to rescale each coordinate. Adam keeps both kinds of state; AdamW chan
 -->
 
 ---
-zoom: 0.85
+zoom: 0.86
 ---
 
 # The Problem: One Learning Rate, Very Different Directions
 
-<img src="/momentum_ravine.png" style="width: 850px !important;">
+<img src="/momentum_ravine.png" style="width: 950px !important;">
 
 <figcaption style="color:#b3b3b3ff; font-size: 11px; position: relative; top: 10px">Image source: <a href="https://d2l.ai/chapter_optimization/momentum.html#an-ill-conditioned-problem">d2l.ai Figs. 12.6.1–12.6.3 Gradient descent and momentum on an ill-conditioned quadratic objective</a></figcaption>
 
-<div class="grid grid-cols-[3fr_2fr] gap-8 mt-3">
+<div class="grid grid-cols-[4fr_2fr] gap-8 mt-3">
 <div>
 
 * $f(x_1,x_2)=0.1x_1^2+2x_2^2$: flat along $x_1$, steep along $x_2$
@@ -30,7 +30,7 @@ zoom: 0.85
 </div>
 <div>
 
-#### Key word: **preconditioning**<br>adapt the effective step to the geometry of the problem.
+> #### Key word: **preconditioning**<br>adapt the effective step to the geometry of the problem.
 </div>
 </div>
 
@@ -45,7 +45,7 @@ normalization layers make some instances easier; adaptive methods estimate coord
 -->
 
 ---
-zoom: 0.86
+zoom: 0.99
 ---
 
 # Momentum: Average the Direction Over Time
@@ -57,8 +57,8 @@ zoom: 0.86
 $$v_t=\beta v_{t-1}+g_t,\qquad \theta_{t+1}=\theta_t-\eta v_t$$
 
 * $v_t$: **velocity**, a leaky average of past gradients
-* $\beta=0$ recovers plain SGD; $\beta=0.9$ is a common default
-* Consistent gradients accumulate; alternating gradients cancel
+* $\beta=0$ recovers plain SGD;<br> $\beta=0.9$ is a common default
+* Consistent gradients accumulate;<br> alternating gradients cancel
 
 </div>
 <div>
@@ -81,13 +81,13 @@ optimizer = torch.optim.SGD(
 <div class="grid grid-cols-2 gap-8 mt-4">
 <div>
 
-#### Like a ball downhill
-Builds speed when the slope keeps pointing the same way.
+> #### Like a ball downhill
+> Builds speed when the slope keeps pointing the same way.
 </div>
 <div>
 
-#### Unlike a bigger batch
-Averages over **time**, not over more examples at one step.
+> #### Unlike a bigger batch
+> Averages over **time**, not over more examples at one step.
 </div>
 </div>
 
@@ -103,12 +103,14 @@ and accelerating consistent progress.
 -->
 
 ---
-zoom: 0.82
+zoom: 0.99
 ---
 
 # Try It: Which Update Reaches the Minimum?
 
 <OptimizerPlayground />
+
+<br>
 
 <span class="refs">Same objective and update rules as [d2l.ai 12.6](https://d2l.ai/chapter_optimization/momentum.html) and [12.8–12.10](https://d2l.ai/chapter_optimization/adam.html) · Demo runs locally in the slide</span>
 
@@ -124,7 +126,7 @@ previous slide supplies the static comparison.
 -->
 
 ---
-zoom: 0.86
+zoom: 0.97
 ---
 
 # Adagrad: A Different Rate for Every Coordinate
@@ -147,14 +149,16 @@ $$s_t=s_{t-1}+g_t^2,\qquad \theta_{t+1}=\theta_t-\frac{\eta}{\sqrt{s_t+\epsilon}
 * Small or infrequent gradients → relatively larger steps
 * One extra state tensor per parameter tensor
 
+</div>
+</div>
+
 <v-click>
 
 ### The weakness
-$s_t$ only grows, so the effective rate can collapse too early. Useful for sparse problems; often too aggressive for long deep-learning runs.
+* $s_t$ only grows, so the effective rate can collapse too early.
+* Useful for sparse problems; often too aggressive for long deep-learning runs.
 
 </v-click>
-</div>
-</div>
 
 <span class="refs">Read: [d2l.ai 12.7](https://d2l.ai/chapter_optimization/adagrad.html) · Paper: [Duchi, Hazan & Singer, 2011](https://jmlr.org/papers/v12/duchi11a.html) · [A. Karpathy, CS231n: adaptive methods](https://cs231n.github.io/neural-networks-3/#ada)</span>
 
@@ -167,7 +171,7 @@ The next slide replaces the ever-growing sum by a moving average.
 -->
 
 ---
-zoom: 0.85
+zoom: 0.89
 ---
 
 # RMSProp: Forget Old Gradient Magnitudes
@@ -215,12 +219,12 @@ form, although PyTorch exposes an optional momentum argument.
 -->
 
 ---
-zoom: 0.82
+zoom: 0.86
 ---
 
 # Adam: Momentum + Adaptive Scaling
 
-<div class="grid grid-cols-[4fr_3fr] gap-8">
+<div class="grid grid-cols-[4fr_3fr] gap-16">
 <div>
 
 ### Keep two moving averages
@@ -270,25 +274,23 @@ like RMSProp but uses the smoothed gradient m instead of the raw gradient g.
 -->
 
 ---
-zoom: 0.88
+zoom: 0.98
 ---
 
 # Adam's Warm-Up Problem: Bias Correction
 
+#### Both moving averages start at zero, so early estimates are biased toward zero.
+
+<br>
+
 <div class="grid grid-cols-[3fr_4fr] gap-8">
 <div>
 
-Both moving averages start at zero, so early estimates are biased toward zero.
 
 ### First step, constant $g=1$
 * $m_1=(1-0.9)\cdot1=0.1$, but $\hat m_1=0.1/(1-0.9)=1$
 * $s_1=(1-0.999)\cdot1=0.001$, but $\hat s_1=0.001/(1-0.999)=1$
 
-<v-click>
-
-#### Correction divides by $1-\beta^t$; its effect fades as $t$ grows.
-
-</v-click>
 </div>
 <div>
   <figure>
@@ -298,7 +300,14 @@ Both moving averages start at zero, so early estimates are biased toward zero.
 </div>
 </div>
 
-#### Without correction, Adam would systematically underestimate both moments at the start of training.
+<br>
+<v-clicks>
+
+* Correction divides by $1-\beta^t$; its effect fades as $t$ grows.
+* Without correction, Adam would systematically underestimate both moments at the start of training.
+
+</v-clicks>
+
 
 <span class="refs">Read: [Kingma & Ba, 2015, Section 3: initialization bias correction](https://arxiv.org/abs/1412.6980) · [A. Karpathy, CS231n: Adam](https://cs231n.github.io/neural-networks-3/#ada)</span>
 
@@ -310,7 +319,7 @@ Skip the detailed numbers if late; keep the sentence "zero-initialized moving av
 -->
 
 ---
-zoom: 0.84
+zoom: 0.92
 ---
 
 # AdamW: Decouple Weight Decay from the Gradient
@@ -361,14 +370,14 @@ different algorithm. Recent PyTorch also offers more controls; the important dis
 -->
 
 ---
-zoom: 0.79
+zoom: 0.89
 ---
 
 # One Task, Six Optimizers — Not a Leaderboard
 
-<img src="/optimizer_comparison.png" style="width: 790px !important;">
+<img src="/optimizer_comparison.png" style="width: 890px !important;">
 
-<div class="grid grid-cols-[3fr_2fr] gap-8 mt-2">
+<div class="grid grid-cols-[4fr_2fr] gap-8 mt-2">
 <div>
 
 * Same 2–16–16–1 MLP, initial weights and batches; **3 seeds**

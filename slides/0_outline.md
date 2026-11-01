@@ -1,35 +1,37 @@
 ---
-zoom: 0.82
+zoom: 0.95
 ---
 
 # From Earlier Lectures to Today
 
-<div class="grid grid-cols-2 gap-12">
+<div class="grid grid-cols-[4fr_3fr] gap-12">
 <div>
 
 ### We already know
-* Forward → loss → backward → update *(Lecture 2)*
-* Learning-rate search and weight decay *(Lecture 2)*
-* Backpropagation and initialization *(Lecture 3)*
-* Batch normalization and residual connections *(Lecture 5)*
-* Gradient clipping *(Lecture 6)*
+* Forward → loss → backward → update<br> *(Lecture 2)*
+* Learning-rate search and weight decay<br> *(Lecture 2)*
+* Backpropagation and initialization<br> *(Lecture 3)*
+* Batch normalization and residual connections<br> *(Lecture 5)*
+* Gradient clipping<br> *(Lecture 6)*
 
 </div>
 <div>
 
 ### Plan for today
-1. **The objective**<br><small>training loss, new-data performance, landscapes</small>
-2. **Stochastic gradients**<br><small>noise, batch size, computation</small>
-3. **Better update rules**<br><small>momentum, adaptive rates, Adam(W)</small>
-4. **Training practice**<br><small>schedules, choice, debugging</small>
-5. **Quiz**<br><small>five questions, about 10–15 minutes</small>
+1. **The objective**<br>training loss, new-data performance, loss landscapes
+
+2. **Stochastic gradients**<br>noise, batch size, computation
+
+3. **Better update rules**<br>momentum, adaptive rates, Adam(W)
+
+4. **Training practice**<br>schedules, choice, debugging
 
 </div>
 </div>
 
 <br>
 
-#### The organizing question: **where does the next parameter update come from?**
+#### The emerging question: **where does the next parameter update come from?**
 
 <span class="refs">Main text: [d2l.ai, Chapter 12](https://d2l.ai/chapter_optimization/index.html) · Practical companion: [A. Karpathy, CS231n: Training Neural Networks III](https://cs231n.github.io/neural-networks-3/) · [S. Raschka, Common Optimization Algorithms](https://sebastianraschka.com/pdf/lecture-notes/stat479ss19/L12_optim_slides.pdf)</span>
 
