@@ -70,10 +70,6 @@ src: ./slides/0_conclusions.md
 ---
 
 ---
-src: ./slides/0_quiz.md
----
-
----
 src: ./slides/0_backup.md
 ---
 
